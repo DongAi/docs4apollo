@@ -23,7 +23,7 @@ TX2上车验证阶段可以简单分为几个步骤：
 首先检查在/dev文件夹下是否生成`video*`文件，该文件为ubuntu加载的摄像头设备文件。
 执行指令`v4l2-ctl --list-devices`查看所有摄像头设备的信息。TX2默认自带了一个摄像头，并标记为`video0`。
 
-![](images/camera_list.jpg)
+![](images/camera_list.png)
 
 上图中展示的摄像头信息是apollo官方推荐的摄像头型号，如果使用了非官方推荐的摄像头，输出的信息会不同。
 
@@ -37,7 +37,7 @@ c) 执行`sudo service udev restart`
 
 上述指令执行完毕后，在`/dev`文件夹下会生成`camera`文件夹，`camera`文件夹下包含了三个软链接文件`lanemark`,`obstacle`和`trafficlights`，分别指向`video*`设备文件。
 
-![](images/camera_link_info.jpg)
+![](images/camera_link_info.png)
 
 创建这三个链接文件的规则为`apollo/docker/setup_host/etc/udev/rules.d/99-webcam.rules`。
 该文件中配置了摄像头设备的信息，摄像头型号不同，rules文件中配置的信息也会不同。所以如果使用了非apollo官方推荐的摄像头，则可以通过如下指令查询摄像头设备的信息：
