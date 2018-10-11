@@ -14,6 +14,14 @@ TX2上车验证阶段可以简单分为几个步骤：
 金瑞祺项目的目标是制作低成本的低速园区自动驾驶方案。`localization`采用`RTK`定位模式。`perception`模块只采用`camera`。
 所以需要的硬件包括：摄像头、IMU、GPS。
 
+在TX2和MKZ车辆的联调中，使用的硬件设备全部为apollo官方推荐的型号，请参考：
+[https://github.com/ApolloAuto/apollo/tree/master/docs/specs](https://github.com/ApolloAuto/apollo/tree/master/docs/specs)
+网址下对Navigation和Camera的信息介绍。
+
+
+如果开发者使用了非官方推荐型号的硬件设备，可能需要额外的配置才能启用设备，关于这方面的资料请参考文档[how_to_use_reduced_or_non_official_recommendation_hardware.md](https://github.com/DongAi/docs4apollo/blob/master/docs/tx2/how_to_use_reduced_or_non_official_recommendation_hardware.md)
+
+
 根据硬件的选型我们可以确认，3个摄像头使用3个USB接口，IMU&GPS使用一个USB接口，那么3-4个USB接口就可以满足金瑞祺项目的需求。
 金瑞祺项目不使用can口与辆车通讯。关于can口的相关知识请参考文档[how to make can work on TX2](http://icode.baidu.com/repos/baidu/baidu/Apollo_Tx2/blob/master:docs/tx2/how_to_make_can_work_on_TX2.md’)
 
