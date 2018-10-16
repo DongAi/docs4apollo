@@ -85,6 +85,10 @@ python的`Popen`函数的功能是已一定的参数启动一个子进程，此�
 
 突然明白了一件事，`cybertron`是以`Component`管理的各个模块，本文开头提到的所有模块在一个进程中的模式，只需要配置一个`launch`文件，`process_name`配置为`apollo`，在对应的`dag`文件中配置上每一个模块的`Component`就可以了。如果区分进程，则配置多个`launch`文件，相对应的`dag`文件中配置每个进程需要管理的模块`Component`就可以了。这回答了问题P1。且上文中某个步骤描述不准确，但是不改了，毕竟这是学习的必经步骤。
 
+顺序图为：
+
+![](images/cybertron/cybertron_launch_sequence.png) 
+
 
 ### 模块调度
 未完待续
