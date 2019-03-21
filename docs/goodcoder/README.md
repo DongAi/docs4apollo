@@ -3,21 +3,21 @@
 数据表的数据之间以TAB键作为分割。
 
 ### 程序结构
-ContianerFactory，为数据容器工厂类。负责管理每个数据表的容器。
+`ContianerFactory`，为数据容器工厂类。负责管理每个数据表的容器。
 
-ContainerBase，数据表容器的基类，定义了数据表容器的接口。
+`ContainerBase`，数据表容器的基类，定义了数据表容器的接口。
 
-ContainerImpl，继承自ContainerBase，实现了数据表的数据加载或数据获取接口。
+`ContainerImpl`，继承自`ContainerBase`，实现了数据表的数据加载或数据获取接口。
 
-TableContainer，继承自ContainerImpl。每个数据表对应一个TableContainer对象，负责创建每个数据表对象。
+`TableContainer`，继承自`ContainerImpl`。每个数据表对应一个`TableContainer`对象，负责创建每个数据表对象。
 
-DataStreamer，数据表文件读取类。负责读取每个数据表文件，并调用数据表对应的TableContainer对象的数据加载函数加载数据。
+`DataStreamer`，数据表文件读取类。负责读取每个数据表文件，并调用数据表对应的`TableContainer`对象的数据加载函数加载数据。
 
-DataTypeParser，数据类型转换类。负责将数据表中配置的字符串记录的数据类型转化为代码中的enum类型，以减少代码中过多的字符串比较。
+`DataTypeParser`，数据类型转换类。负责将数据表中配置的字符串记录的数据类型转化为代码中的enum类型，以减少代码中过多的字符串比较。
 
-TableBase，数据表对象基类。
+`TableBase`，数据表对象基类。
 
-TablePlanningTable，继承自TableBase。Planning数据表的数据对象，该对象由TableContainer创建和管理，数据表的每一行对应一个TablePlanningTable对象。
+`TablePlanningTable`，继承自`TableBase`。Planning数据表的数据对象，该对象由`TableContainer`创建和管理，数据表的每一行对应一个`TablePlanningTable`对象。
 
 ### 数据表结构
 为了保证数据表的可读性，要求每个数据表的第一行为数据列的注释名。注释名的存在可以方便以后对数据表读取代码生成工具的扩展。
@@ -42,8 +42,6 @@ TablePlanningTable，继承自TableBase。Planning数据表的数据对象，该
 数据表加载阶段会强制匹配上述的规则字符串，无法匹配时视为读表失败，用户可以查看错误日志确认错误原因。
 
 用户需要确认每一列的数据类型，并按照规则字符串进行配置。
-
-### 添加新的数据类型
 
 ### 添加新的数据表
 程序中使用宏定义了数据表的加载和数据获取逻辑，所以用户可以改动很少的代码以增删数据表。
@@ -116,6 +114,9 @@ $ make
 
 ### 错误记录
 为了增加程序的鲁棒性，尽早的发现和提醒用户数据表错误。程序中增加了几处错误检测机制。
-
-
-
+1. 无法打开数据表文件时，程序退出，日志输出`cannot load file`
+2. 无法获取数据表容器时，程序退出，日志输出`cannot get table container`
+3. 数据类型配制错误时，程序assert crash退出，日志输出`cannot parse datatype, check the spelling!`
+4. 数据列数和数据类型的列数不相等时，程序assert crash退出，日志输出`length of datatype is not equal to length of data!`
+5. 配置的数据和数据类型不对应时，程序assert crash退出，日志输出`error type!......`
+6. 获取数组数据或自定义数据，且配置不符合规则的，程序assert crash退出，日志输出`error format!`
